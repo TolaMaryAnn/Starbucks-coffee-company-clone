@@ -1,4 +1,4 @@
-"use client";  {/* Menu Links */}
+"use client"; 
 
 import { useState } from "react";
 import Link from "next/link";
@@ -34,7 +34,7 @@ export default function Navbar() {
               REWARDS
             </Link>
             <Link
-              href="/gift-cards"
+              href="/giftCards"
               className="text-black font-bold text-sm tracking-wide hover:text-green-800"
             >
               GIFT CARDS
@@ -43,7 +43,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center space-x-6">
-          <Link href="/store-locator" className="flex items-center space-x-1">
+          <Link href="/storeLocator" className="flex items-center space-x-1">
             <FaMapMarkerAlt className="text-black hover:text-green-800 text-2xl" />
             <span className="text-black font-bold text-sm tracking-wide hover:text-green-800">
               Find a store
@@ -99,7 +99,7 @@ export default function Navbar() {
             REWARDS
           </Link>
           <Link
-            href="/gift-cards"
+            href="/giftCards"
             className="text-black text-lg font-bold tracking-wide hover:text-green-800"
             onClick={() => setMenuOpen(false)}
           >
@@ -121,7 +121,7 @@ export default function Navbar() {
             Join Now
           </Link>
           <Link
-            href="/store-locator"
+            href="/storeLocator"
             className="text-black text-xl font-bold tracking-wide hover:text-green-800 flex items-center space-x-2"
             onClick={() => setMenuOpen(false)}
           >
