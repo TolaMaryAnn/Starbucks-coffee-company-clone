@@ -141,7 +141,7 @@ export default function Footer() {
 
         <hr className="border-gray-300 mb-8" />
 
-        <div className="flex space-x-8 mb-6 px-4">
+        <div className="flex space-x-6 md:space-x-8 mb-6 px-4">
           <a href="#spotify" className="text-black hover:text-green-600">
             <FaSpotify size={30} />
           </a>
