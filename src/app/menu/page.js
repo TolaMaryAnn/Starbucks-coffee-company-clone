@@ -3,6 +3,16 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { Lora } from 'next/font/google';
+import PageTransition from "@/PageTransition";
+
+
+
+const lora = Lora ({
+  subsets: ['latin'],
+  weight: ['400', '700'], 
+});
+
 
 const Menu = () => {
   const [activeCategory, setActiveCategory] = useState("Drinks");
@@ -119,7 +129,8 @@ const Menu = () => {
   };
 
   return (
-    <div>
+    <PageTransition>
+    <div className={lora.className}> 
       <Navbar />
       <div className="flex flex-col md:flex-row">
         {/* Left Column */}
@@ -211,6 +222,7 @@ const Menu = () => {
       </div>
       <Footer />
     </div>
+    </PageTransition>
   );
 };
 

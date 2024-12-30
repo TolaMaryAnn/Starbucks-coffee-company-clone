@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-
+import PageTransition from "@/PageTransition";
 import Image from "next/image";
 import style from "styled-jsx/style";
 import {
@@ -12,6 +12,14 @@ import {
   FaRegCreditCard,
   FaGift,
 } from "react-icons/fa";
+
+import { Lora } from 'next/font/google';
+
+const lora = Lora ({
+  subsets: ['latin'],
+  weight: ['400', '700'], 
+});
+
 
 export default function rewards() {
   const [animate, setAnimate] = useState(false);
@@ -57,7 +65,8 @@ export default function rewards() {
     },
   };
   return (
-    <div>
+    <PageTransition>
+    <div className={lora.className}>
       <Navbar />
       <div className="bg-green-800 px-32 text-white tracking-wider font-bold text-xl py-6 sticky top-0 z-50">
         Starbucks® Rewards
@@ -507,5 +516,6 @@ export default function rewards() {
       <hr className="border-gray-300 mb-8" />
       <Footer />
     </div>
+    </PageTransition>
   );
 }

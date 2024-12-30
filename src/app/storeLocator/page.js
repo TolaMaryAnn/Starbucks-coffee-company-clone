@@ -3,6 +3,12 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
+import { Lora } from 'next/font/google';
+import PageTransition from "@/PageTransition";
+const lora = Lora ({
+  subsets: ['latin'],
+  weight: ['400', '700'], 
+});
 
 export default function StoreLocator() {
   const [activeTab, setActiveTab] = useState("pickup");
@@ -12,7 +18,9 @@ export default function StoreLocator() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <PageTransition>
+   <div className={lora.className}>
+     <div className="min-h-screen bg-white flex flex-col">
       <Navbar />
 
       <div className="sticky top-0 z-50 ">
@@ -142,5 +150,7 @@ export default function StoreLocator() {
         </div>
       </div>
     </div>
+   </div>
+   </PageTransition>
   );
 }

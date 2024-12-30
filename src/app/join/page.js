@@ -6,6 +6,14 @@ import Link from "next/link";
 
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FiMenu, FiX } from "react-icons/fi";
+import { Lora } from 'next/font/google';
+
+const lora = Lora ({
+  subsets: ['latin'],
+  weight: ['400', '700'], 
+});
+
+
 
 export default function join() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,7 +30,7 @@ export default function join() {
   };
 
   return (
-    <div>
+    <div className={lora.className}> 
       <header className="bg-white shadow-md">
         <nav className="container flex items-center justify-between py-4 px-6 md:px-10">
           <div className="flex items-center space-x-8">

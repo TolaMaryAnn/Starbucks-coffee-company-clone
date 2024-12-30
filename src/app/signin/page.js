@@ -5,6 +5,12 @@ import Link from "next/link";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Lora } from 'next/font/google';
+import PageTransition from "@/PageTransition";
+const lora = Lora ({
+  subsets: ['latin'],
+  weight: ['400', '700'], 
+});
 
 export default function signin() {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,7 +25,8 @@ export default function signin() {
   };
   const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <div>
+    <PageTransition>
+    <div className={lora.className}>
       <header className="bg-white shadow-md">
         <nav className="container flex items-center justify-between py-4 px-6 md:px-10">
           <div className="flex items-center space-x-8">
@@ -175,5 +182,6 @@ export default function signin() {
       <div className="my-8 border-t border-gray-300"></div>
       <Footer />
     </div>
+    </PageTransition>
   );
 }

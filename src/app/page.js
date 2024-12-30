@@ -10,24 +10,25 @@ import BelovedTradition from "./components/BelovedTradition";
 import Text from "./components/Text";
 import Footer from "./components/Footer";
 
+import { Lora } from "next/font/google";
 
+const lora = Lora({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export default function Home() {
   return (
-    <div>
-
-    <Navbar/>
-    <Starbucks4life/>
-    <JoyInEverySip/>
-    <MerryChristmas/>
-    <UnwrapYourGifts/>
-    <FeedingAmerica/>
-    <BelovedTradition/>
-    <Text/>
-    <Footer/>
-
+    <div className={lora.className}>
+      <Navbar />
+      <Starbucks4life />
+      <JoyInEverySip />
+      <MerryChristmas />
+      <UnwrapYourGifts />
+      <FeedingAmerica />
+      <BelovedTradition />
+      <Text />
+      <Footer />
     </div>
-    
-   
   );
 }

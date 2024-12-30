@@ -1,7 +1,7 @@
 export default function Text() {
   return (
     <div className="p-8 md:p-16 text-center text-black">
-      <div className="max-w-4xl mx-auto space-y-8 text-sm md:text-xl">
+      <div className="max-w-4xl mx-auto space-y-8 text-sm md:text-lg">
         <div>
           *No Purchase Necessary, U.S. 18+, See Official Rules for alternate
           method. Enter by 1/5/25. <br />
