@@ -1,187 +1,316 @@
 "use client";
+
 import { useState } from "react";
 import Footer from "../components/Footer";
 import Link from "next/link";
-import { FaMapMarkerAlt } from "react-icons/fa";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Lora } from 'next/font/google';
+import { Lora } from "next/font/google";
 import PageTransition from "@/PageTransition";
-const lora = Lora ({
-  subsets: ['latin'],
-  weight: ['400', '700'], 
+
+const lora = Lora({
+  subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
-export default function signin() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [hasText, setHasText] = useState(false);
+export default function Signin() {
+  const [showPassword, setShowPassword] =
+    useState(false);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  const [hasPasswordText, setHasPasswordText] =
+    useState(false);
 
-  const handleInputChange = (e) => {
-    setHasText(e.target.value.length > 0);
-  };
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const [keepSignedIn, setKeepSignedIn] =
+    useState(false);
+
   return (
     <PageTransition>
-    <div className={lora.className}>
-      <header className="bg-white shadow-md">
-        <nav className="container flex items-center justify-between py-4 px-6 md:px-10">
-          <div className="flex items-center space-x-8">
+      <div
+        className={`${lora.className} min-h-screen bg-[#f8f6f2]`}
+      >
+        {/* HEADER */}
+        <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+          <nav className="max-w-7xl mx-auto flex items-center justify-between px-5 md:px-10 py-4">
             <Link href="/">
               <img
                 src="/Assets/Starbucks_Corporation_Logo_2011.svg"
-                alt="Starbucks Logo"
-                className="h-12 md:h-16 cursor-pointer"
+                alt="Logo"
+                className="h-10 md:h-14 cursor-pointer"
               />
             </Link>
+
+            <button
+              className="md:hidden text-3xl"
+              onClick={() => setMenuOpen(true)}
+            >
+              <FiMenu />
+            </button>
+          </nav>
+
+          {/* MOBILE MENU */}
+          <div
+            className={`fixed inset-0 bg-black/40 z-50 transition-opacity duration-300 ${menuOpen
+                ? "opacity-100 visible"
+                : "opacity-0 invisible"
+              }`}
+          >
+            <div
+              className={`absolute right-0 top-0 h-full w-[80%] bg-white shadow-2xl transition-transform duration-300 ${menuOpen
+                  ? "translate-x-0"
+                  : "translate-x-full"
+                }`}
+            >
+              <div className="flex justify-end p-5">
+                <button
+                  className="text-3xl"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <FiX />
+                </button>
+              </div>
+
+              <div className="px-6 flex flex-col gap-6 mt-6">
+                <Link
+                  href="/"
+                  className="text-lg font-semibold"
+                >
+                  Home
+                </Link>
+
+                <Link
+                  href="/rewards"
+                  className="text-lg font-semibold"
+                >
+                  Rewards
+                </Link>
+
+                <Link
+                  href="/menu"
+                  className="text-lg font-semibold"
+                >
+                  Menu
+                </Link>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* HERO */}
+        <section className="pt-14 md:pt-20 pb-10 px-5">
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="uppercase tracking-[0.25em] text-sm text-[#b38728] font-semibold mb-4">
+              Welcome Back
+            </p>
+
+            <h1 className="text-3xl md:text-5xl font-bold text-[#1e3932] leading-tight mb-5">
+              Sign in to your account
+            </h1>
+
+            <p className="text-gray-600 text-sm md:text-base leading-7 max-w-xl mx-auto">
+              Access your rewards, order ahead,
+              save favorites, and enjoy exclusive
+              BrewVista member perks.
+            </p>
+          </div>
+        </section>
+
+        {/* FORM SECTION */}
+        <section className="pb-16 px-4">
+          <div className="max-w-2xl mx-auto bg-white rounded-[30px] border border-gray-100 shadow-[0_20px_70px_rgba(0,0,0,0.08)] overflow-hidden">
+            {/* TOP BAR */}
+            <div className="bg-[#1e3932] px-6 md:px-10 py-5">
+              <p className="text-sm text-white/80">
+                <span className="text-[#d4a853]">
+                  *
+                </span>{" "}
+                indicates required field
+              </p>
+            </div>
+
+            <div className="p-5 md:p-10">
+              {/* FORM HEADER */}
+              <div className="mb-10">
+                <h2 className="text-2xl md:text-3xl font-bold text-[#1e3932] mb-3">
+                  Account Sign In
+                </h2>
+
+                <p className="text-gray-500 text-sm leading-7">
+                  Enter your login details to continue
+                  enjoying your rewards and personalized
+                  experience.
+                </p>
+              </div>
+
+              <form className="space-y-7">
+                {/* EMAIL */}
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="username"
+                    placeholder=" "
+                    className="peer w-full h-[62px] px-4 border border-gray-300 rounded-2xl bg-white text-black focus:outline-none focus:border-[#1e3932] focus:ring-4 focus:ring-green-100 transition"
+                  />
+
+                  <label
+                    htmlFor="username"
+                    className="absolute left-4 top-5 text-gray-500 bg-white px-1 transition-all duration-200
+                    peer-placeholder-shown:top-5
+                    peer-focus:-top-2.5
+                    peer-focus:text-sm
+                    peer-focus:text-[#1e3932]
+                    peer-not-placeholder-shown:-top-2.5
+                    peer-not-placeholder-shown:text-sm"
+                  >
+                    Username or Email{" "}
+                    <span className="text-red-500">
+                      *
+                    </span>
+                  </label>
+                </div>
+
+                {/* PASSWORD */}
+                <div className="relative">
+                  <input
+                    type={
+                      showPassword
+                        ? "text"
+                        : "password"
+                    }
+                    id="password"
+                    placeholder=" "
+                    onChange={(e) =>
+                      setHasPasswordText(
+                        e.target.value.length > 0
+                      )
+                    }
+                    className="peer w-full h-[62px] px-4 border border-gray-300 rounded-2xl bg-white text-black focus:outline-none focus:border-[#1e3932] focus:ring-4 focus:ring-green-100 transition"
+                  />
+
+                  <label
+                    htmlFor="password"
+                    className={`absolute left-4 bg-white px-1 transition-all duration-200 ${hasPasswordText || showPassword
+                        ? "-top-2.5 text-sm text-[#1e3932]"
+                        : "top-5 text-gray-500"
+                      }`}
+                  >
+                    Password{" "}
+                    <span className="text-red-500">
+                      *
+                    </span>
+                  </label>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setShowPassword(!showPassword)
+                    }
+                    className="absolute right-4 top-5 text-gray-500 hover:text-black"
+                  >
+                    {showPassword ? (
+                      <FaEyeSlash className="w-5 h-5" />
+                    ) : (
+                      <FaEye className="w-5 h-5" />
+                    )}
+                  </button>
+                </div>
+
+                {/* KEEP SIGNED IN */}
+                <div className="bg-[#f8f6f2] border border-[#ece6dc] rounded-2xl p-5">
+                  <div className="flex items-start justify-between gap-4 flex-wrap">
+                    <label className="flex items-start gap-4 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={keepSignedIn}
+                        onChange={() =>
+                          setKeepSignedIn(
+                            !keepSignedIn
+                          )
+                        }
+                        className="mt-1 w-5 h-5 accent-[#1e3932]"
+                      />
+
+                      <div>
+                        <p className="text-sm font-semibold text-[#1e3932]">
+                          Keep me signed in
+                        </p>
+
+                        <p className="text-xs text-gray-500 mt-1 leading-6">
+                          Securely stay signed in on this
+                          device for faster checkout and
+                          easier access.
+                        </p>
+                      </div>
+                    </label>
+
+                    <button
+                      type="button"
+                      className="text-sm text-[#1e3932] font-semibold underline"
+                    >
+                      Details
+                    </button>
+                  </div>
+                </div>
+
+                {/* LINKS */}
+                <div className="flex flex-col gap-4">
+                  <a
+                    href="#"
+                    className="text-[#1e3932] underline font-semibold text-sm md:text-base"
+                  >
+                    Forgot your username?
+                  </a>
+
+                  <a
+                    href="#"
+                    className="text-[#1e3932] underline font-semibold text-sm md:text-base"
+                  >
+                    Forgot your password?
+                  </a>
+                </div>
+
+                {/* BUTTON */}
+                <div className="pt-2 flex justify-center md:justify-end">
+                  <button
+                    type="submit"
+                    className="w-full md:w-auto bg-[#1e3932] hover:bg-[#163028] text-white font-semibold rounded-full px-10 py-4 text-base transition-all duration-200 shadow-lg hover:shadow-xl"
+                  >
+                    Sign In
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
 
-          <button
-            className="md:hidden text-black text-4xl"
-            onClick={() => setMenuOpen(true)}
-          >
-            <FiMenu />
-          </button>
-        </nav>
+          {/* JOIN CTA */}
+          <div className="max-w-2xl mx-auto mt-14">
+            <div className="bg-gradient-to-br from-[#1e3932] to-[#295140] rounded-[30px] p-7 md:p-10 text-center shadow-[0_20px_60px_rgba(30,57,50,0.25)]">
+              <p className="uppercase tracking-[0.2em] text-[#d4a853] text-sm font-bold mb-4">
+                New Here?
+              </p>
 
-        <div
-          className={`fixed inset-0 z-50 bg-white transition-transform duration-300 ease-in-out ${
-            menuOpen ? "translate-x-0" : "translate-x-full"
-          }`}
-        >
-          <button
-            className="absolute top-4 right-6 text-black text-4xl"
-            onClick={() => setMenuOpen(false)}
-          >
-            <FiX />
-          </button>
-        </div>
-      </header>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">
+                Join BrewVista Rewards
+              </h3>
 
-      <h2 className="text-3xl font-extrabold text-center text-black mt-10 ">
-        Sign in or create an account
-      </h2>
+              <p className="text-white/75 text-sm md:text-base leading-7 max-w-xl mx-auto mb-8">
+                Earn Stars for every purchase, unlock
+                birthday treats, order ahead, and enjoy
+                exclusive rewards made just for members.
+              </p>
 
-      <section className="py-16">
-        <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-8">
-          <div className="mb-8 text-lg text-black font-bold">
-            <span className="text-green-800">*</span> indicates required field
+              <Link href="/join">
+                <button className="bg-white hover:bg-[#f2f2f2] text-[#1e3932] font-semibold rounded-full px-8 py-3 transition-all duration-200 shadow-lg">
+                  Create an Account
+                </button>
+              </Link>
+            </div>
           </div>
-          <form>
-            <div className="relative mb-6">
-              <input
-                type="text"
-                id="username"
-                placeholder=" "
-                className="peer w-full px-4 py-4 border rounded-lg focus:outline-none focus:ring focus:ring-green-500"
-              />
-              <label
-                htmlFor="username"
-                className="absolute left-4 top-3 text-gray-700 text-2xl transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-xl peer-placeholder-shown:text-black peer-focus:top-[-10px] peer-focus:text-sm peer-focus:text-green-800 bg-white px-1"
-              >
-                <span className="text-green-800">*</span> Username or email
-                address
-              </label>
-            </div>
+        </section>
 
-            <div className="relative mb-6">
-              <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                placeholder=" "
-                onChange={handleInputChange}
-                className="peer w-full px-4 py-4 border rounded-lg focus:outline-none focus:ring focus:ring-green-500"
-              />
-              <label
-                htmlFor="password"
-                className={`absolute left-4 ${
-                  hasText || showPassword
-                    ? "top-[-10px] text-sm text-green-800"
-                    : "top-3 text-xl text-black"
-                } transition-all duration-300 bg-white px-1`}
-              >
-                <span className="text-green-800">*</span> Password
-              </label>
-              <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                className="absolute right-4 top-4 text-gray-600 hover:text-gray-800 focus:outline-none"
-              >
-                {showPassword ? (
-                  <FaEyeSlash className="w-5 h-5" />
-                ) : (
-                  <FaEye className="w-5 h-5" />
-                )}
-              </button>
-            </div>
-
-            <div className="flex items-center justify-between mb-4">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="appearance-none w-6 h-6 border border-gray-400 rounded-md checked:bg-green-800 checked:border-green-800 checked:focus:ring-green-500 focus:outline-none focus:ring focus:ring-green-500 flex-shrink-0 transition-all duration-300 relative 
-  before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-3 before:h-3 before:bg-white before:rounded-sm before:scale-0 checked:before:scale-100"
-                />
-                <span className="text-black font-bold ml-4 font-normal">
-                  Keep me signed in.
-                </span>
-              </label>
-              <a
-                href="#details"
-                className="text-green-800 font-extrabold hover:underline text-lg"
-              >
-                Details
-              </a>
-            </div>
-
-            <div className="flex flex-col font-extrabold gap-2 mb-6">
-              <a
-                href="#forgot-username"
-                className="text-green-800 hover:underline text-lg underline"
-              >
-                Forgot your username?
-              </a>
-              <a
-                href="#forgot-password"
-                className="text-green-800 hover:underline text-lg underline"
-              >
-                Forgot your password?
-              </a>
-            </div>
-
-            <div className="flex justify-end">
-              <button
-                type="submit"
-                className="text-xl bg-green-800 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-full focus:outline-none focus:ring focus:ring-green-500"
-              >
-                Sign in
-              </button>
-            </div>
-          </form>
-
-          <div className="my-8 border-t border-gray-300"></div>
-        </div>
-
-        <div className="text-center mt-20">
-          <h3 className="text-lg font-extrabold text-green-800 mb-4">
-            JOIN STARBUCKS® REWARDS
-          </h3>
-          <p className="text-black font-normal mb-6">
-            Join Starbucks® Rewards to earn free food and drinks, get free
-            refills, pay <br /> and order with your phone, and more.
-          </p>
-          <button className=" border border-green-800 hover:bg-gray-200 text-green-800 font-bold py-2 px-6 rounded-full focus:outline-none focus:ring focus:ring-gray-500">
-            Join now
-          </button>
-        </div>
-      </section>
-
-      <div className="my-8 border-t border-gray-300"></div>
-      <Footer />
-    </div>
+        <Footer />
+      </div>
     </PageTransition>
   );
 }
